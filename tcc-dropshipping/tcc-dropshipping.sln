@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tcc-api", "tcc-api\tcc-api.csproj", "{29BD0D13-4C56-4255-B3F8-E248FCAFB607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tcc-UI", "tcc-UI\tcc-UI.csproj", "{38FEB1E7-033C-4447-AA2C-CAFFEC04672D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tcc-criar-db", "tcc-criar-db\tcc-criar-db.csproj", "{EE8A97EE-2238-4419-BF83-30503DAF6FE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29BD0D13-4C56-4255-B3F8-E248FCAFB607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29BD0D13-4C56-4255-B3F8-E248FCAFB607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29BD0D13-4C56-4255-B3F8-E248FCAFB607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29BD0D13-4C56-4255-B3F8-E248FCAFB607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38FEB1E7-033C-4447-AA2C-CAFFEC04672D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38FEB1E7-033C-4447-AA2C-CAFFEC04672D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38FEB1E7-033C-4447-AA2C-CAFFEC04672D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38FEB1E7-033C-4447-AA2C-CAFFEC04672D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8A97EE-2238-4419-BF83-30503DAF6FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8A97EE-2238-4419-BF83-30503DAF6FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8A97EE-2238-4419-BF83-30503DAF6FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8A97EE-2238-4419-BF83-30503DAF6FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C14FA346-2D85-47CA-AFC0-1A6067110CF9}
+	EndGlobalSection
+EndGlobal
