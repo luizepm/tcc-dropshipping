@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Seja bem vindo!</h1>
+        <p>Temos os melhores produtos no departamente de tecnologia, então aproveite!</p>
+    </div>
+</div>
+
+<div class="row">
+    @{
+        var model = ViewData["Produtos"] as tcc_UI.Models.ProdutoModels;
+        foreach (var item in model.ListaDeProdutos)
+        {
+            var urlImagem = Url.Content("~/Content/images/" + item.IdProduto + ".jpg");
+            <div class="col-md-4">
+                <h2>@item.NomeProduto</h2>
+                <p>@item.Descricao</p>
+                <p>R$@item.Valor</p>
+                <img src="@urlImagem" alt="@item.NomeProduto" />
+                <p>
+                    @Html.ActionLink("Quero comprar!", "Details", new { id = item.IdProduto }, new { @class = "btn btn-secondary" })
+
+                    @*<a class="btn btn-secondary" href="#" role="button">Ver detalhes &raquo;</a>*@
+                </p>
+            </div>
+        }
+    }
+</div>

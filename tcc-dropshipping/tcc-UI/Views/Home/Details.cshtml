@@ -1,0 +1,36 @@
+﻿@model tcc_UI.Models.ProdutoModels
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.IdProduto)
+    @Html.HiddenFor(model => model.IdFornecedor)
+    @Html.HiddenFor(model => model.NomeProduto)
+    @Html.HiddenFor(model => model.Descricao)
+    @Html.HiddenFor(model => model.Valor)
+    var urlImagem = Url.Content("~/Content/images/" + Model.IdProduto + ".jpg");
+
+    <div class="card" style="width: 18rem;">
+        <img src="@urlImagem" alt="@Model.NomeProduto" style="margin: 0 auto">
+        <div class="card-body">
+            <h5 class="card-title">@Model.NomeProduto</h5>
+            <p class="card-text">@Model.Descricao
+            <p>R$@Model.Valor</p>
+
+            @Html.DropDownListFor(m => m.Quantidade, new List<SelectListItem>
+                                { new SelectListItem{Text="1", Value="1"},
+                                 new SelectListItem{Text="2", Value="2"},
+                                 new SelectListItem{Text="3", Value="3"},
+                                 new SelectListItem{Text="4", Value="4"},
+                                 new SelectListItem{Text="5", Value="5"}},
+                                 "Selecione a quantidade", new { @class = "custom-select" })
+            
+            <br />
+            <input type="submit" value="Incluir no Carrinho" class="btn btn-primary" />
+        </div>
+    </div>
+}

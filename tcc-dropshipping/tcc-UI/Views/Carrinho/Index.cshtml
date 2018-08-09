@@ -1,0 +1,60 @@
+﻿@model tcc_UI.Models.CarrinhoModels
+
+@{
+    ViewBag.Title = "Meu Carrinho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Carrinho de Compras</h2>
+@if (Model.Itens.Count() == 0)
+{
+    <p>Não existe nenhum item no seu carrinho de compras.</p>
+}
+else
+{
+    <text>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="remover">+</th>
+                    <th class="produto">Produto</th>
+                    <th class="descricao">Quantidade</th>
+                    <th class="preco">Valor</th>
+                    <th class="preco">Total do item</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                    foreach (var item in Model.Itens)
+                    {
+
+                        double total = Math.Round(item.Valor * item.Quantidade, 2);
+
+                        <tr>
+                            <td>
+                                @Html.ActionLink(" ", "Delete", new { id = i }, new { onclick = "return confirm('Tem certeza que deseja remover este item do carrinho?');", @class = "imgDelete", Title = "Excluir" })
+                            </td>
+                            <td>@item.NomeProduto</td>
+                            <td>@item.Quantidade</td>
+                            <td>R$@item.Valor</td>
+                            <td>R$@total</td>
+                        </tr>
+
+                        i++;
+                    }
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                        <td>Total: R$@Math.Round(Model.Total, 2)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <div>
+            @Html.ActionLink("Continuar Comprando", "Index", "Home", null, new { @class = "btn btn-primary" }) &nbsp;&nbsp;
+            @Html.ActionLink("Realizar o Checkout", "Index", "Checkout", null, new { @class = "btn btn-primary" })
+        </div>
+    </text>
+}
+
