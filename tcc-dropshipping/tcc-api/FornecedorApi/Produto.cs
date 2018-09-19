@@ -7,15 +7,67 @@ namespace tcc_api.FornecedorApi
 {
     public class Produto
     {
-        public Produto[] ListaDeProdutos { get; set; }
+        public List<Produto> ObterProdutos()
+        {
+            var listaFinal = new List<Produto>();
+            using (var contexto = new Contexto())
+            {
+                var fornecedores = contexto.Fornecedores;
 
-        public Produto() { }
+                foreach (var forn in fornecedores)
+                {
+                    var lista = ObterProdutosMockFornecedor(forn);
+                    listaFinal.AddRange(lista);
+                }
+            }
 
-        public Produto(Int32? idFornecedor)
+            return listaFinal;
+        }
+
+        public Produto ObterProdutoPorId(int id)
+        {
+            var lista = ObterListaMockDeProduto(id, null);
+            return lista != null ? lista.FirstOrDefault() : null;
+        }
+
+        public List<Produto> ObterProdutosFornecedor(string nome, string descricao, double? valorInicial, double? valorFinal)
+        {
+            var listaFinal = new List<Produto>();
+            using (var contexto = new Contexto())
+            {
+                var fornecedores = contexto.Fornecedores;
+
+                foreach (var forn in fornecedores)
+                {
+                    var lista = ObterProdutosMockFornecedor(forn).Where(x => x.NomeProduto.ToUpper().Trim().Contains(nome.ToUpper().Trim()));
+
+                    if (!string.IsNullOrEmpty(descricao) && descricao != "null")
+                        lista = lista.Where(x => x.Descricao.ToUpper().Trim().Contains(descricao.ToUpper().Trim()));
+
+                    if (valorInicial.HasValue)
+                        lista = lista.Where(x => x.Valor >= valorInicial);
+
+                    if (valorFinal.HasValue)
+                        lista = lista.Where(x => x.Valor <= valorFinal);
+
+
+                    listaFinal.AddRange(lista);
+                }
+            }
+
+            return listaFinal;
+        }
+
+        private List<Produto> ObterProdutosMockFornecedor(Fornecedor forn)
+        {
+            return ObterListaMockDeProduto(null, forn.IdFornecedor);
+        }
+
+        private List<Produto> ObterListaMockDeProduto(int? idProduto, int? idFornecedor)
         {
             double percentual = 1.2;
 
-            ListaDeProdutos = new Produto[]
+            var listaMock = new List<Produto>
             {
                 // Extra
                 new Produto()
@@ -61,16 +113,6 @@ namespace tcc_api.FornecedorApi
                     NomeProduto = "Notebook Dell Inspiron 5000",
                     Descricao = "Notebook completo com alta performance para estudos e trabalho",
                     Valor = 1999.99 * percentual
-                },
-
-                // Submarino
-                new Produto()
-                {
-                    IdProduto = 6,
-                    IdFornecedor = 2,
-                    NomeProduto = "Câmera Digital Gopro Hero 5 Black",
-                    Descricao = "Gopro Hero 5 Black à prova d'água 12.1MP com Wi-Fi",
-                    Valor = 1699.99 * percentual
                 },
 
                 new Produto()
@@ -129,8 +171,18 @@ namespace tcc_api.FornecedorApi
                 }
             };
 
-            if (idFornecedor.HasValue && idFornecedor.Value > 0)
-                ListaDeProdutos = ListaDeProdutos.Where(x => x.IdFornecedor == idFornecedor.Value).ToArray();
+            if (idProduto.HasValue)
+                listaMock = listaMock.Where(x => x.IdProduto == idProduto.Value).ToList();
+
+            if (idFornecedor.HasValue)
+                listaMock = listaMock.Where(x => x.IdFornecedor == idFornecedor.Value).ToList();
+
+            return listaMock;
+        }
+
+        private List<Produto> ObterListaMockDeProdutoPorFornecedor(int idFornecedor)
+        {
+            return ObterListaMockDeProduto(null, idFornecedor).Where(x => x.IdFornecedor == idFornecedor).ToList();
 
         }
 

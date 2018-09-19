@@ -18,11 +18,13 @@ namespace tcc_criar_db
         }
 
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 IdPedidoProduto { get; set; }
+        public int IdPedidoProduto { get; set; }
 
+        [ForeignKey("Pedido")]
+        public int IdPedidoRef { get; set; }
         public virtual Pedido Pedido { get; set; }
 
-        public Int32 IdProdutoFornecedor { get; set; }
+        public int IdProdutoFornecedor { get; set; }
 
         [Required, StringLength(100, ErrorMessage = "A nome do produto é obrigatório")]
         public string NomeProduto { get; set; }

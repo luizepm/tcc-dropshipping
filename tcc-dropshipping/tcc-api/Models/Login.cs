@@ -14,6 +14,8 @@ namespace tcc_api
         [Key, ForeignKey("Cliente")]  
         public Int32 IdLogin { get; set; }
 
+        public Int32 Perfil { get; set; }
+
         [Required, StringLength(100, ErrorMessage = "O e-mail é obrigatório")]
         public string Email { get; set; }
 

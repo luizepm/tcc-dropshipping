@@ -9,7 +9,7 @@ namespace tcc_criar_db
 {
     public class InicializarBd
     {
-        public static void GeraTabelas(bool excluiBD)
+        public static void GeraTabelas(bool excluiBD, string senhaEcryptValue)
         {
             try
             {
@@ -37,7 +37,8 @@ namespace tcc_criar_db
                     {
                         Cliente = cliente,
                         Email = "luiz@teste.com",
-                        Senha = "123$%#",
+                        Perfil = 1,
+                        Senha = senhaEcryptValue,
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
@@ -80,6 +81,9 @@ namespace tcc_criar_db
                     {
                         Nome = "SUBMARINO",
                         Cnpj = "17.538.038/0001-15",
+                        URL = "http://api.hom.submarino/Produtos",
+                        UsuarioApi = "Luiz-TCC-Submarino",
+                        SenhaApi = Program.EncryptValue("Sub123!@#"),
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
@@ -87,6 +91,9 @@ namespace tcc_criar_db
                     {
                         Nome = "EXTRA",
                         Cnpj = "47.189.286/0001-69",
+                        URL = "http://api.hom.extra/Produtos",
+                        UsuarioApi = "Luiz-TCC-extra",
+                        SenhaApi = Program.EncryptValue("Ext0044@#"),
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
@@ -94,6 +101,9 @@ namespace tcc_criar_db
                     {
                         Nome = "SHOPTIME",
                         Cnpj = "58.103.961/0001-01",
+                        URL = "http://api.hom.shoptime/Produtos",
+                        UsuarioApi = "Luiz-TCC-Shoptime",
+                        SenhaApi = Program.EncryptValue("Shop567(#"),
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
@@ -120,7 +130,7 @@ namespace tcc_criar_db
                     var pedido = new Pedido
                     {
                         Cliente = cliente,
-                        Endereco = endereco1,
+                        IdEnderecoRef = 1,
                         Fornecedor = fornecedor1,
                         UsuarioManutencao = "LUIZEDUA"
                     };
@@ -152,14 +162,22 @@ namespace tcc_criar_db
                     _contexto.PedidoProdutos.Add(pedidoProduto1);
                     _contexto.PedidoProdutos.Add(pedidoProduto2);
 
-                    var statusPedido = new StatusPedido
+                    var statusPedido1 = new StatusPedido
                     {
                         Pedido = pedido,
                         Status = "1",
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
-                    _contexto.StatusPedido.Add(statusPedido);
+                    var statusPedido2 = new StatusPedido
+                    {
+                        Pedido = pedido,
+                        Status = "2",
+                        UsuarioManutencao = "EXTRA"
+                    };
+
+                    _contexto.StatusPedido.Add(statusPedido1);
+                    _contexto.StatusPedido.Add(statusPedido2);
 
                     var frete = new Frete
                     {

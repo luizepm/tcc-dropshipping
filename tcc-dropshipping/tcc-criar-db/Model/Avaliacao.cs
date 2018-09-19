@@ -23,7 +23,7 @@ namespace tcc_criar_db
         [Required, StringLength(300, ErrorMessage = "A nome do produto é obrigatório")]
         public string Descricao { get; set; }
 
-        public Int32 Nota { get; set; }
+        public int Nota { get; set; }
 
         public DateTime DtInclusao { get; set; }
 

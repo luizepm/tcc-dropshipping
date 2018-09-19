@@ -13,21 +13,18 @@ namespace tcc_criar_db
     public class Pedido : Manutencao
     {
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 IdPedido { get; set; }
+        public int IdPedido { get; set; }
 
-        //[ForeignKey("Cliente")]
-        //[Column(Order = 2)]
-        //public Int32 IdCliente { get; set; }
+        [ForeignKey("Cliente")]
+        public int IdClienteRef { get; set; }
+        public virtual Cliente Cliente { get; set; }
 
-        //[ForeignKey("Fornecedor")]
-        //[Column(Order = 3)]
-        //public Int32 IdFornecedor { get; set; }
+        [ForeignKey("Fornecedor")]
+        public int IdFornecedorRef { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
 
         //[ForeignKey("Endereco")]
-        //public Int32 IdEndereco { get; set; }
-
-        public virtual Cliente Cliente { get; set; }
-        public virtual Fornecedor Fornecedor { get; set; }
-        public virtual Endereco Endereco { get; set; }
+        public int IdEnderecoRef { get; set; }
+        //public virtual Endereco Endereco { get; set; }
     }
 }

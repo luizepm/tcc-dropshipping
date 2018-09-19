@@ -13,7 +13,7 @@ namespace tcc_api
     {
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(Order = 1)]
-        public Int32 IdCliente { get; set; }
+        public int IdCliente { get; set; }
 
         [Required, StringLength(50, ErrorMessage = "O nome do cliente é obrigatório")]
         public string Nome { get; set; }

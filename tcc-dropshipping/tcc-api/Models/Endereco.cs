@@ -14,15 +14,14 @@ namespace tcc_api
     {
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(Order = 1)]
-        public Int32 IdEndereco { get; set; }
+        public int IdEndereco { get; set; }
 
         // relacionamento 1 para muitos (incluir a FK)
-        [Key, Required, ForeignKey("Cliente")]
+        [ForeignKey("Cliente")]
         [Column(Order = 2)]
-        public int IdCliente { get; set; }
+        public int IdClienteRef { get; set; }
 
         // Entidade da FK 1 para muitos
-        [Required]
         public virtual Cliente Cliente { get; set; } 
 
         [Required, StringLength(50, ErrorMessage = "A rua é obrigatória")]
@@ -32,7 +31,7 @@ namespace tcc_api
         public string Bairro { get; set; }
 
         [Required(ErrorMessage = "O número é obrigatório")]
-        public Int32 Numero { get; set; }
+        public int Numero { get; set; }
 
         [Required, StringLength(10, ErrorMessage = "O CEP é obrigatório")]
         public string Cep { get; set; }

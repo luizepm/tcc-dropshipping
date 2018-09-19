@@ -35,6 +35,18 @@ namespace CodeFirst.WebApi.Controller
             return Ok(login);
         }
 
+        // GET: api/Logins/5
+        [ResponseType(typeof(Login))]
+        public IHttpActionResult GetLogin(string email, string senha)
+        {
+            Login login = db.Logins.FirstOrDefault(l => l.Email.ToUpper().Trim() == email.ToUpper().Trim() && l.Senha.Trim() == senha.Trim());
+
+            if (login == null)
+                return NotFound();
+
+            return Ok(login);
+        }
+
         // PUT: api/Logins/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutLogin(int id, Login login)

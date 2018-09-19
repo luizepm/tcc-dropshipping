@@ -27,6 +27,13 @@
     {
         totalDeItensCarrinho = ((tcc_UI.Models.CarrinhoModels)Session["ShoppingCarrinho"]).Itens.Count;
     }
+
+    tcc_UI.Models.LoginModels login = null;
+
+    if (Session["Login"] != null)
+    {
+        login = (tcc_UI.Models.LoginModels)Session["Login"];
+    }
 }
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -34,11 +41,10 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="@Html.Action("Index", "Home")">Home <span class="sr-only">(atual)</span></a>
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Smartphones</a>
@@ -50,37 +56,44 @@
             <form class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        @Html.ActionLink(string.Format("Meu Carrinho - {0} produto(s)", totalDeItensCarrinho), "Index", "Carrinho")
+                        @Html.ActionLink(string.Format("Carrinho - {0} produto(s)", totalDeItensCarrinho), "Index", "Carrinho", new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minha conta</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="#">Minha conta</a>
-                            <a class="dropdown-item" href="#">Meus pedidos</a>
-                            <a class="dropdown-item" href="#">Sair</a>
-                        </div>
-                    </li>
+                    @{
+                        if (login != null)
+                        {
+                            <li class="nav-item">Bem vindo, @login.Email</li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Minha conta</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="@Url.Action("Index", "MinhaConta")">Minha conta</a>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "MeusPedidos")">Meus pedidos</a>
+                                    <a class="dropdown-item" href="@Url.Action("Sair", "Login")">Sair</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Efetuar login", "Index", "Login", null, new { @class = "nav-link" })
+                        }
+                    }
                 </ul>
-
                 <input class="form-control mr-sm-2" type="text" placeholder="Pesquisa" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
         </div>
     </nav>
-
     <main role="main">
         <div class="container">
             @RenderBody()
             <hr>
         </div>
     </main>
-
     <footer class="container">
         <p>&copy; Loja Virtual @DateTime.Now.Year </p>
     </footer>
-
     <script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>
     <script src="~/Scripts/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

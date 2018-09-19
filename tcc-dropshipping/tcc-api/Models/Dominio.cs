@@ -13,7 +13,7 @@ namespace tcc_api
     public class Dominio : Manutencao
     {
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 IdDominio { get; set; }
+        public int IdDominio { get; set; }
 
         [Required, StringLength(50, ErrorMessage = "A nome do domínio é obrigatório")]
         public string Nome { get; set; }

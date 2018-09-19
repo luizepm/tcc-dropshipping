@@ -10,7 +10,7 @@ namespace tcc_UI.Controllers
     {
         public ActionResult Index()
         {
-            var fornecedor = new Helpers.FornecedorApi();
+            var fornecedor = new Helpers.LojaApi();
             ViewData["Produtos"] = fornecedor.ObterProdutos();
 
             ViewBag.Message = "Bem vindo a nossa loja!";
@@ -19,7 +19,7 @@ namespace tcc_UI.Controllers
 
         public ActionResult Details(int id)
         {
-            var fornecedor = new Helpers.FornecedorApi();
+            var fornecedor = new Helpers.LojaApi();
             var model = fornecedor.ObterProduto(id);
 
             if (model == null)

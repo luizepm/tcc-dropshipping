@@ -13,7 +13,7 @@ namespace tcc_criar_db
     public class Frete : Manutencao
     {
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 IdFrete { get; set; }
+        public int IdFrete { get; set; }
 
         [Required, StringLength(20, ErrorMessage = "O código para rastreio do pedido é obrigatório")]
         public string CodigoRastreio { get; set; }

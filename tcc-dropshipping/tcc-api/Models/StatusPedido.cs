@@ -17,15 +17,16 @@ namespace tcc_api
             DtInclusao = DateTime.Now;
         }
 
-        [Key, ForeignKey("Pedido")]
-        public Int32 IdStatusPedido { get; set; }
+        [Key]
+        public int IdStatusPedido { get; set; }
+
+        [ForeignKey("Pedido")]
+        public int IdPedidoRef { get; set; }
+        public virtual Pedido Pedido { get; set; }
 
         [Required, StringLength(2, ErrorMessage = "O status do pedido é obrigatório")]
         public string Status { get; set; }
 
         public DateTime DtInclusao { get; set; }
-
-        [Required]
-        public virtual Pedido Pedido { get; set; }
     }
 }

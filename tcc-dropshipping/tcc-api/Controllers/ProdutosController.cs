@@ -14,17 +14,26 @@ namespace tcc_api.Controllers
         // GET: api/Produtos
         public IEnumerable<FornecedorApi.Produto> Get()
         {
-            prd = new FornecedorApi.Produto(null);
-            return prd.ListaDeProdutos;
+            prd = new FornecedorApi.Produto();
+            return prd.ObterProdutos();
         }
 
         // GET: api/Produtos/5
         public FornecedorApi.Produto Get(int id)
         {
-            prd = new FornecedorApi.Produto(null);
-            var item = prd.ListaDeProdutos.FirstOrDefault(x => x.IdProduto == id);
+            prd = new FornecedorApi.Produto();
+            return prd.ObterProdutoPorId(id);
+        }
 
-            return item;
+        // GET: api/Produtos/5
+        [Route("api/Produtos/{nome}/{descricao}/{valorInicial}/{valorFinal}")]
+        public IEnumerable<FornecedorApi.Produto> Get(string nome, 
+                                                      string descricao, 
+                                                      double? valorInicial, 
+                                                      double? valorFinal)
+        {
+            prd = new FornecedorApi.Produto();
+            return prd.ObterProdutosFornecedor(nome, descricao, valorInicial, valorFinal);
         }
 
         // POST: api/Produtos

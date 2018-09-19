@@ -13,13 +13,22 @@ namespace tcc_criar_db
     public class Fornecedor : Manutencao
     {
         [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 IdFornecedor { get; set; }
+        public int IdFornecedor { get; set; }
 
         [Required, StringLength(80, ErrorMessage = "A nome do fornecedor é obrigatório")]
         public string Nome { get; set; }
 
         [Required, StringLength(20, ErrorMessage = "O CNPJ é obrigatório")]
         public string Cnpj { get; set; }
+
+        [Required]
+        public string URL { get; set; }
+
+        [Required]
+        public string UsuarioApi { get; set; }
+
+        [Required]
+        public string SenhaApi { get; set; }
 
         public virtual ICollection<Pedido> Pedidos { get; set; }
     }
