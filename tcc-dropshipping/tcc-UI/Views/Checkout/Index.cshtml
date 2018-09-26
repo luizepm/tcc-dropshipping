@@ -1,0 +1,74 @@
+﻿@model tcc_UI.Models.CheckoutModel
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Checkout</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IdCliente)
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="produto">Produto</th>
+                <th class="descricao">Quantidade</th>
+                <th class="preco">Valor</th>
+                <th class="preco">Total do item</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 0;
+                foreach (var item in Model.Carrinho.Itens)
+                {
+                    double total = Math.Round(item.ValorFinal * item.Quantidade, 2);
+
+                    <tr>
+                        <td>@item.NomeProduto</td>
+                        <td>@item.Quantidade</td>
+                        <td>@String.Format("{0:C}", item.ValorFinal)</td>
+                        <td>@String.Format("{0:C}", total)</td>
+                    </tr>
+
+                    i++;
+                }
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td>Total: @String.Format("{0:C}", Model.Carrinho.Total)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdEndereco, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdEndereco, Model.GetEnderecos(Model.IdCliente), new { @class = "custom-select col-md-8" })
+            @Html.ValidationMessageFor(model => model.IdEndereco, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TipoPagamento, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.TipoPagamento, Model.GetTiposPagamentos(), new { @class = "custom-select col-md-4" })
+            @Html.ValidationMessageFor(model => model.TipoPagamento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Finalizar Pedido" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}

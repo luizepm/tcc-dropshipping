@@ -19,12 +19,8 @@ namespace tcc_criar_db
         public int IdClienteRef { get; set; }
         public virtual Cliente Cliente { get; set; }
 
-        [ForeignKey("Fornecedor")]
-        public int IdFornecedorRef { get; set; }
-        public virtual Fornecedor Fornecedor { get; set; }
-
-        //[ForeignKey("Endereco")]
         public int IdEnderecoRef { get; set; }
-        //public virtual Endereco Endereco { get; set; }
+
+        public int IdFormaPagamento { get; set; }
     }
 }

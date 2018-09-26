@@ -22,6 +22,8 @@ namespace tcc_api
 
         public double Valor { get; set; }
 
+        [ForeignKey("Pedido")]
+        public int IdPedidoRef { get; set; }
         public virtual Pedido Pedido { get; set; }
     }
 }

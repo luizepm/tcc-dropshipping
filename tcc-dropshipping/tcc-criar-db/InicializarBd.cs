@@ -131,8 +131,8 @@ namespace tcc_criar_db
                     {
                         Cliente = cliente,
                         IdEnderecoRef = 1,
-                        Fornecedor = fornecedor1,
-                        UsuarioManutencao = "LUIZEDUA"
+                        UsuarioManutencao = "LUIZEDUA",
+                        IdFormaPagamento = 1
                     };
 
                     _contexto.Pedidos.Add(pedido);
@@ -145,6 +145,7 @@ namespace tcc_criar_db
                         Imagem = string.Empty,
                         ValorFornecedor = 799.90,
                         ValorFinal = ObterValorFinal(0.2, 799.90),
+                        Fornecedor = fornecedor1,
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
@@ -156,6 +157,7 @@ namespace tcc_criar_db
                         Imagem = string.Empty,
                         ValorFornecedor = 49.90,
                         ValorFinal = ObterValorFinal(0.2, 49.90),
+                        Fornecedor = fornecedor2,
                         UsuarioManutencao = "LUIZEDUA"
                     };
 
@@ -181,7 +183,7 @@ namespace tcc_criar_db
 
                     var frete = new Frete
                     {
-                        Pedido = pedido,
+                        IdPedidoRef = pedido.IdPedido,
                         CodigoRastreio = "BR6645155XPTO",
                         DtPrevisaoEntrega = DateTime.Now.AddDays(10),
                         Valor = 15,

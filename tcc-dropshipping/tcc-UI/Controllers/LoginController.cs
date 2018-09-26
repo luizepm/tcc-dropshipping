@@ -24,7 +24,7 @@ namespace tcc_UI.Controllers
                 var login = lojaApi.ValidarLogin(model.Email, Encrypt.EncryptValue(model.Senha));
 
                 if (login != null)
-                    Session["Login"] = model;
+                    Session["Login"] = login;
                 else
                 {
                     ViewBag.MensagemErroLogin = "Usuário e/ou senha inválidos.";

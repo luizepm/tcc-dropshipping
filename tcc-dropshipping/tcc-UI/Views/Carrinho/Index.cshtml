@@ -29,7 +29,7 @@ else
                     foreach (var item in Model.Itens)
                     {
 
-                        double total = Math.Round(item.Valor * item.Quantidade, 2);
+                        double total = Math.Round(item.ValorFinal * item.Quantidade, 2);
 
                         <tr>
                             <td>
@@ -37,15 +37,15 @@ else
                             </td>
                             <td>@item.NomeProduto</td>
                             <td>@item.Quantidade</td>
-                            <td>R$@item.Valor</td>
-                            <td>R$@total</td>
+                            <td>@String.Format("{0:C}", item.ValorFinal)</td>
+                            <td>@String.Format("{0:C}", total)</td>
                         </tr>
 
                         i++;
                     }
                     <tr>
-                        <td colspan="3">&nbsp;</td>
-                        <td>Total: R$@Math.Round(Model.Total, 2)</td>
+                        <td colspan="4">&nbsp;</td>
+                        <td>Total: @String.Format("{0:C}", Model.Total)</td>
                     </tr>
                 }
             </tbody>

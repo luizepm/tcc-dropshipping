@@ -8,7 +8,7 @@ namespace tcc_UI.Models
 {
     public class LoginModels
     {
-        public Int32 IdLogin { get; set; }
+        public int IdLogin { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -18,6 +18,12 @@ namespace tcc_UI.Models
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 
-        public Int32 Perfil { get; set; }
+        //public string NomeCliente { get; set; }
+
+        //public string UsuarioManutencao { get; set; }
+
+        public ClienteModel Cliente { get; set; }
+
+        public int Perfil { get; set; }
     }
 }

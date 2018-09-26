@@ -22,6 +22,13 @@ namespace CodeFirst.WebApi.Controller
             return db.Enderecos;
         }
 
+        // GET: api/Produtos/5
+        [Route("api/Enderecos/Cliente/{idCliente}")]
+        public IEnumerable<Endereco> Get(int idCliente)
+        {
+            return db.Enderecos.Where(x => x.IdClienteRef == idCliente);
+        }
+
         // GET: api/Enderecos/5
         [ResponseType(typeof(Endereco))]
         public IHttpActionResult GetEndereco(int id)

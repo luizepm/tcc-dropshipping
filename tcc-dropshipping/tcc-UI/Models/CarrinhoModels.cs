@@ -10,7 +10,7 @@ namespace tcc_UI.Models
         private List<ProdutoModels> _Itens = new List<ProdutoModels>();
         public List<ProdutoModels> Itens { get { return _Itens; } }
 
-        public double Total { get { return _Itens.Sum(p => p.Valor * p.Quantidade); } }
+        public double Total { get { return _Itens.Sum(p => p.ValorFinal * p.Quantidade); } }
 
         public void AddItem(ProdutoModels produto)
         {

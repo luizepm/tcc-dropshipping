@@ -3,15 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using tcc_UI.Models;
 
 namespace tcc_UI.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string nomePesquisa)
         {
             var fornecedor = new Helpers.LojaApi();
-            ViewData["Produtos"] = fornecedor.ObterProdutos();
+
+            if (string.IsNullOrEmpty(nomePesquisa))
+            {
+                ViewData["Produtos"] = fornecedor.ObterProdutos();
+                ViewBag.NomePesquisa = "";
+            }
+            else
+            {
+                ViewData["Produtos"] = fornecedor.PesquisarProdutos(nomePesquisa);
+                var model = ViewData["Produtos"] as List<tcc_UI.Models.ProdutoModels>;
+                ViewBag.NomePesquisa = string.Format("{0} registro(s) encontrados para pesquisa {1}.", model.Count(), nomePesquisa);
+            }
 
             ViewBag.Message = "Bem vindo a nossa loja!";
             return View();
@@ -32,7 +44,6 @@ namespace tcc_UI.Controllers
         public ActionResult Details(Models.ProdutoModels model)
         {
             var qtde = Request.Form["qtde"];
-            model.Quantidade = Convert.ToInt32(qtde);
 
             // Cria um carrinho vazio na sessão se ele não exitir
             if (Session["ShoppingCarrinho"] == null)

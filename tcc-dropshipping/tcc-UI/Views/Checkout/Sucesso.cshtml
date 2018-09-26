@@ -1,0 +1,41 @@
+﻿@model tcc_UI.Models.PedidoRealizadoComSucessoModel
+
+@{
+    ViewBag.Title = "Sucesso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Parabéns, seu pedido foi realizado com sucesso!</h2>
+
+<div>
+    <h4>Detalhes do pedido:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoRastreio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoRastreio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtPrevisaoEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtPrevisaoEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdPedidoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdPedidoCliente)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Continuar Comprando", "Index", "Home", null, new { @class = "btn btn-primary" })
+</p>

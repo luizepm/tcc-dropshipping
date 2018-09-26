@@ -24,6 +24,10 @@ namespace tcc_api
         public int IdPedidoRef { get; set; }
         public virtual Pedido Pedido { get; set; }
 
+        [ForeignKey("Fornecedor")]
+        public int IdFornecedorRef { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
+
         public int IdProdutoFornecedor { get; set; }
 
         [Required, StringLength(100, ErrorMessage = "A nome do produto é obrigatório")]

@@ -1,28 +1,31 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Loja Dropshipping - TCC";
 }
 
-<div class="jumbotron">
-    <div class="container">
-        <h1 class="display-4">Seja bem vindo - Loja Dropshipping TCC!</h1>
-        <p>Temos os melhores produtos no departamente de tecnologia, então aproveite!</p>
+@if (string.IsNullOrEmpty(ViewBag.NomePesquisa))
+{
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Seja bem vindo - Loja Dropshipping TCC!</h1>
+            <p>Temos os melhores produtos no departamente de tecnologia, então aproveite!</p>
+        </div>
     </div>
-</div>
-
+}
 <div class="container">
     <div class="row">
         @{
             var model = ViewData["Produtos"] as List<tcc_UI.Models.ProdutoModels>;
             foreach (var item in model)
             {
-                var urlImagem = Url.Content("~/Content/images/" + item.IdProduto + ".jpg");
+                var urlImagem = Url.Content("~/Content/images/" + item.IdProdutoFornecedor + ".jpg");
                 <div class="col-md-4">
                     <img src="@urlImagem" alt="@item.NomeProduto" />
                     <h4>@item.NomeProduto</h4>
                     <p>@item.Descricao</p>
-                    <h5>@String.Format("{0:C}", item.Valor)</h5>
+                    <h5>@String.Format("{0:C}", item.ValorFinal)</h5>
                     <p>
-                        @Html.ActionLink("Quero comprar!", "Details", new { id = item.IdProduto }, new { @class = "btn btn-outline-secondary" })
+                        @Html.ActionLink("Quero comprar!", "Details", new { id = item.IdProdutoFornecedor }, new { @class = "btn btn-outline-secondary" })
                     </p>
                     <br />
                 </div>
