@@ -12,7 +12,12 @@ namespace tcc_UI.Models
         public int IdClienteRef { get; set; }
 
         public int IdEnderecoRef { get; set; }
-
+        
         public int IdFormaPagamento { get; set; }
+
+        public List<ProdutoModels> Itens { get; set; }
+        public List<StatusPedidoModel> StatusPedido { get; set; }
+        public FreteModel Frete { get; set; }
+        public EnderecoModel Endereco { get; set; }
     }
 }

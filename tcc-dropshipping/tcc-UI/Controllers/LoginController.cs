@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using tcc_UI.Helpers;
+using tcc_UI.Models;
 
 namespace tcc_UI.Controllers
 {
@@ -16,7 +19,7 @@ namespace tcc_UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Models.LoginModels model)
+        public ActionResult Index(LoginModels model)
         {
             if (ModelState.IsValid)
             {
@@ -57,22 +60,41 @@ namespace tcc_UI.Controllers
         // GET: Login/Create
         public ActionResult Create()
         {
-            return View();
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("pt");
+
+            var model = new LoginModels
+            {
+                Perfil = 1,
+                Cliente = new ClienteModel()
+            };
+
+            var endereco = new EnderecoModel
+            {
+                Pais = "Brasil"
+            };
+
+            model.Cliente.Enderecos = new List<EnderecoModel>();
+            model.Cliente.Enderecos.Add(endereco);
+
+            return View(model);
         }
 
         // POST: Login/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(LoginModels model)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
+                return View(model);
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
 

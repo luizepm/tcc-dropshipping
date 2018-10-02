@@ -35,6 +35,14 @@ namespace CodeFirst.WebApi.Controller
             return Ok(statusPedido);
         }
 
+        [Route("api/StatusPedido/Pedido/{idPedido}")]
+        public IQueryable<StatusPedido> GetStatusPedidoPorPedido(int idPedido)
+        {
+            var lista = db.StatusPedido.Where(x => x.IdPedidoRef == idPedido);
+
+            return lista;
+        }
+
         // PUT: api/StatusPedidos/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutStatusPedido(int id, StatusPedido statusPedido)

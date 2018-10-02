@@ -35,6 +35,12 @@ namespace CodeFirst.WebApi.Controller
             return Ok(pedidoProduto);
         }
 
+        [Route("api/PedidoProdutos/Pedido/{idPedido}")]
+        public IQueryable<PedidoProduto> GetPedidoProdutoPorIdPedido(int idPedido)
+        {
+            return db.PedidoProdutos.Where(x => x.IdPedidoRef == idPedido);
+        }
+
         // PUT: api/PedidoProdutos/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPedidoProduto(int id, PedidoProduto pedidoProduto)

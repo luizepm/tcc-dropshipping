@@ -47,23 +47,10 @@ namespace tcc_criar_db
                     var endereco1 = new Endereco
                     {
                         Cliente = cliente,
-                        Rua = "Teste",
-                        Numero = 123,
-                        Bairro = "Xpto",
+                        Rua = "Marechal Deodoro",
+                        Numero = 94,
+                        Bairro = "Centro",
                         Cep = "09175-320",
-                        Cidade = "São Paulo",
-                        Estado = "SP",
-                        Pais = "Brasil",
-                        UsuarioManutencao = "LUIZEDUA"
-                    };
-
-                    var endereco2 = new Endereco
-                    {
-                        Cliente = cliente,
-                        Rua = "Teste 2",
-                        Numero = 999,
-                        Bairro = "Blins",
-                        Cep = "09175-999",
                         Cidade = "São Caetano do Sul",
                         Estado = "SP",
                         Pais = "Brasil",
@@ -71,7 +58,6 @@ namespace tcc_criar_db
                     };
 
                     _contexto.Enderecos.Add(endereco1);
-                    _contexto.Enderecos.Add(endereco2);
 
                     #endregion
 
@@ -127,85 +113,85 @@ namespace tcc_criar_db
 
                     #region Criação do Pedido
 
-                    var pedido = new Pedido
-                    {
-                        Cliente = cliente,
-                        IdEnderecoRef = 1,
-                        UsuarioManutencao = "LUIZEDUA",
-                        IdFormaPagamento = 1
-                    };
+                    //var pedido = new Pedido
+                    //{
+                    //    Cliente = cliente,
+                    //    IdEnderecoRef = 1,
+                    //    UsuarioManutencao = "LUIZEDUA",
+                    //    IdFormaPagamento = 1
+                    //};
 
-                    _contexto.Pedidos.Add(pedido);
+                    //_contexto.Pedidos.Add(pedido);
 
-                    var pedidoProduto1 = new PedidoProduto
-                    {
-                        Pedido = pedido,
-                        IdProdutoFornecedor = 3659,
-                        NomeProduto = "SMARTPHONE SAMSUNG GALAXY J7 3GB/32GB",
-                        Imagem = string.Empty,
-                        ValorFornecedor = 799.90,
-                        ValorFinal = ObterValorFinal(0.2, 799.90),
-                        Fornecedor = fornecedor1,
-                        UsuarioManutencao = "LUIZEDUA"
-                    };
+                    //var pedidoProduto1 = new PedidoProduto
+                    //{
+                    //    Pedido = pedido,
+                    //    IdProdutoFornecedor = 3659,
+                    //    NomeProduto = "SMARTPHONE SAMSUNG GALAXY J7 3GB/32GB",
+                    //    Imagem = string.Empty,
+                    //    ValorFornecedor = 799.90,
+                    //    ValorFinal = ObterValorFinal(0.2, 799.90),
+                    //    Fornecedor = fornecedor1,
+                    //    UsuarioManutencao = "LUIZEDUA"
+                    //};
 
-                    var pedidoProduto2 = new PedidoProduto
-                    {
-                        Pedido = pedido,
-                        IdProdutoFornecedor = 9966,
-                        NomeProduto = "CARTÃO DE MEMÓRIA KINGSTON 32GB",
-                        Imagem = string.Empty,
-                        ValorFornecedor = 49.90,
-                        ValorFinal = ObterValorFinal(0.2, 49.90),
-                        Fornecedor = fornecedor2,
-                        UsuarioManutencao = "LUIZEDUA"
-                    };
+                    //var pedidoProduto2 = new PedidoProduto
+                    //{
+                    //    Pedido = pedido,
+                    //    IdProdutoFornecedor = 9966,
+                    //    NomeProduto = "CARTÃO DE MEMÓRIA KINGSTON 32GB",
+                    //    Imagem = string.Empty,
+                    //    ValorFornecedor = 49.90,
+                    //    ValorFinal = ObterValorFinal(0.2, 49.90),
+                    //    Fornecedor = fornecedor2,
+                    //    UsuarioManutencao = "LUIZEDUA"
+                    //};
 
-                    _contexto.PedidoProdutos.Add(pedidoProduto1);
-                    _contexto.PedidoProdutos.Add(pedidoProduto2);
+                    //_contexto.PedidoProdutos.Add(pedidoProduto1);
+                    //_contexto.PedidoProdutos.Add(pedidoProduto2);
 
-                    var statusPedido1 = new StatusPedido
-                    {
-                        Pedido = pedido,
-                        Status = "1",
-                        UsuarioManutencao = "LUIZEDUA"
-                    };
+                    //var statusPedido1 = new StatusPedido
+                    //{
+                    //    Pedido = pedido,
+                    //    Status = "1",
+                    //    UsuarioManutencao = "LUIZEDUA"
+                    //};
 
-                    var statusPedido2 = new StatusPedido
-                    {
-                        Pedido = pedido,
-                        Status = "2",
-                        UsuarioManutencao = "EXTRA"
-                    };
+                    //var statusPedido2 = new StatusPedido
+                    //{
+                    //    Pedido = pedido,
+                    //    Status = "2",
+                    //    UsuarioManutencao = "EXTRA"
+                    //};
 
-                    _contexto.StatusPedido.Add(statusPedido1);
-                    _contexto.StatusPedido.Add(statusPedido2);
+                    //_contexto.StatusPedido.Add(statusPedido1);
+                    //_contexto.StatusPedido.Add(statusPedido2);
 
-                    var frete = new Frete
-                    {
-                        IdPedidoRef = pedido.IdPedido,
-                        CodigoRastreio = "BR6645155XPTO",
-                        DtPrevisaoEntrega = DateTime.Now.AddDays(10),
-                        Valor = 15,
-                        UsuarioManutencao = "LUIZEDUA"
-                    };
+                    //var frete = new Frete
+                    //{
+                    //    IdPedidoRef = pedido.IdPedido,
+                    //    CodigoRastreio = "BR6645155XPTO",
+                    //    DtPrevisaoEntrega = DateTime.Now.AddDays(10),
+                    //    Valor = 15,
+                    //    UsuarioManutencao = "LUIZEDUA"
+                    //};
 
-                    _contexto.Frete.Add(frete);
+                    //_contexto.Frete.Add(frete);
 
                     #endregion
 
                     #region Avaliação
 
-                    var avaliacao = new Avaliacao
-                    {
-                        Cliente = cliente,
-                        PedidoProduto = pedidoProduto1,
-                        Nota = 10,
-                        Descricao = "Ótimo celular",
-                        UsuarioManutencao = "LUIZEDUA"
-                    };
+                    //var avaliacao = new Avaliacao
+                    //{
+                    //    Cliente = cliente,
+                    //    PedidoProduto = pedidoProduto1,
+                    //    Nota = 10,
+                    //    Descricao = "Ótimo celular",
+                    //    UsuarioManutencao = "LUIZEDUA"
+                    //};
 
-                    _contexto.Avaliacao.Add(avaliacao);
+                    //_contexto.Avaliacao.Add(avaliacao);
 
                     #endregion
 

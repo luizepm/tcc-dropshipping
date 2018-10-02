@@ -21,6 +21,12 @@ namespace CodeFirst.WebApi.Controller
         {
             return db.Pedidos;
         }
+        
+        [Route("api/pedidos/Cliente/{idCliente}")]
+        public IQueryable<Pedido> GetPedidoCliente(int idCliente)
+        {
+            return db.Pedidos.Where(x => x.IdClienteRef == idCliente);
+        }
 
         // GET: api/Pedidos/5
         [ResponseType(typeof(Pedido))]

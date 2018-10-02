@@ -87,31 +87,35 @@ namespace tcc_UI.Controllers
                 var idStatusPedido = lojaApi.InserirStatusPedido(statusPedido);
 
                 // gravar Frete
-                var frete = new FreteModel
-                {
-                    IdPedidoRef = idPedido,
-                    CodigoRastreio = "BR6645155XPTO",
-                    DtPrevisaoEntrega = DateTime.Now.AddDays(10),
-                    Valor = 15,
-                    UsuarioManutencao = Login.Cliente.ObterNomeUsuario()
-                };
+                //var frete = new FreteModel
+                //{
+                //    IdPedidoRef = idPedido,
+                //    CodigoRastreio = "BR6645155XPTO",
+                //    DtPrevisaoEntrega = DateTime.Now.AddDays(10),
+                //    Valor = 15,
+                //    UsuarioManutencao = Login.Cliente.ObterNomeUsuario()
+                //};
 
-                var idFrete = lojaApi.InserirFrete(frete);
+                //var idFrete = lojaApi.InserirFrete(frete);
 
                 // Zerar Carrinho
                 Session["ShoppingCarrinho"] = null;
 
                 var sucesso = new PedidoRealizadoComSucessoModel
                 {
-                    CodigoRastreio = frete.CodigoRastreio,
-                    DtPrevisaoEntrega = frete.DtPrevisaoEntrega.ToString("dd/MM/yyyy"),
+                    //CodigoRastreio = frete.CodigoRastreio,
+                    //DtPrevisaoEntrega = frete.DtPrevisaoEntrega.ToString("dd/MM/yyyy"),
                     IdPedidoCliente = Funcoes.ObterCodigoPedidoCliente(idPedido, Login.Cliente.Nome, Login.Cliente.Sobrenome)
                 };
 
                 return View("Sucesso", sucesso);
             }
             else
+            {
+                model.IdCliente = Login.IdLogin;
+                model.Carrinho = Carrinho;
                 return View(model);
+            }
         }
     }
 }

@@ -43,18 +43,26 @@ namespace tcc_UI.Controllers
         [HttpPost]
         public ActionResult Details(Models.ProdutoModels model)
         {
-            var qtde = Request.Form["qtde"];
+            if (model.Quantidade > 0)
+            {
 
-            // Cria um carrinho vazio na sessão se ele não exitir
-            if (Session["ShoppingCarrinho"] == null)
-                Session["ShoppingCarrinho"] = new Models.CarrinhoModels();
+                // Cria um carrinho vazio na sessão se ele não exitir
+                if (Session["ShoppingCarrinho"] == null)
+                    Session["ShoppingCarrinho"] = new Models.CarrinhoModels();
 
-            // Pega o carrinho atual da Sessão
-            var carrinho = (Models.CarrinhoModels)Session["ShoppingCarrinho"];
+                // Pega o carrinho atual da Sessão
+                var carrinho = (Models.CarrinhoModels)Session["ShoppingCarrinho"];
 
-            carrinho.AddItem(model);
+                carrinho.AddItem(model);
 
-            return RedirectToAction("Index", "Carrinho");
+                return RedirectToAction("Index", "Carrinho");
+            }
+            else
+            {
+                ViewBag.Mensagem = "Selecione a quantidade.";
+            }
+
+            return View(model);
         }
     }
 }

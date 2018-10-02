@@ -30,7 +30,7 @@ namespace tcc_UI.Models
             {
                 Selected = false,
                 Text = "Selecione...",
-                Value = "0"
+                Value = ""
             });
 
             var lojaApi = new LojaApi();
@@ -38,10 +38,9 @@ namespace tcc_UI.Models
 
             foreach (EnderecoModel item in enderecos)
             {
-                var endereco = string.Format("{0}, {1} - Bairro {2}, {3} - {4} - CEP: {5}", item.Rua, item.Numero, item.Bairro, item.Cidade, item.Estado, item.Cep);
                 list.Add(new SelectListItem
                 {
-                    Text = endereco,
+                    Text = item.ObterEndereco(),
                     Value = item.IdEndereco.ToString()
                 });
             }
@@ -56,7 +55,7 @@ namespace tcc_UI.Models
             {
                 Selected = false,
                 Text = "Selecione...",
-                Value = "0"
+                Value = ""
             });
 
             list.Add(new SelectListItem

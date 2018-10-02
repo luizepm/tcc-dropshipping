@@ -32,7 +32,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+                <input type="submit" value="Login" class="btn btn-default btn-load" />
+                @Html.ActionLink("Quero me Cadastrar!", "Create", "Login", null, new { @class = "btn btn-primary btn-load" }) &nbsp;&nbsp;
             </div>
         </div>
     </div>

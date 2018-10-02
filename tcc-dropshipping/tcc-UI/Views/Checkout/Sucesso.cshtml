@@ -8,10 +8,9 @@
 <h2>Parabéns, seu pedido foi realizado com sucesso!</h2>
 
 <div>
-    <h4>Detalhes do pedido:</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.CodigoRastreio)
         </dt>
 
@@ -25,7 +24,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.DtPrevisaoEntrega)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.IdPedidoCliente)
@@ -37,5 +36,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Continuar Comprando", "Index", "Home", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Continuar Comprando", "Index", "Home", null, new { @class = "btn btn-primary btn-load" })
 </p>

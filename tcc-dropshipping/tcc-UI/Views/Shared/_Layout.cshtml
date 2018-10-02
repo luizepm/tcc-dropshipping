@@ -85,7 +85,7 @@
                 {
                     @Html.TextBox("NomePesquisa", "", new { @class = "form-control mr-sm-2", placeholder = "Pesquisa" })
                     <div>
-                        <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Pesquisar" id="btnPesquisar" />
+                        <input type="submit" class="btn btn-outline-success my-2 my-sm-0 btn-load" value="Pesquisar" id="btnPesquisar" />
                     </div>
                 }
             </form>
@@ -114,7 +114,7 @@
         }
 
         $(function () {
-            $(".btn").click(function () {
+            $(".btn-load").click(function () {
                 setTimeout(LoadingModal(), 1000);
             });
         });

@@ -35,6 +35,12 @@ namespace CodeFirst.WebApi.Controller
             return Ok(frete);
         }
 
+        [Route("api/fretes/cliente/{idPedido}")]
+        public Frete GetFretePorPedido(int idPedido)
+        {
+            return db.Frete.First(x => x.IdPedidoRef == idPedido);
+        }
+
         // PUT: api/Fretes/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutFrete(int id, Frete frete)

@@ -26,7 +26,14 @@ namespace tcc_UI.Helpers
             ProdutoEntregue = 5
         }
 
-        #region Fornecedor
+        public enum FormaDePagamento
+        {
+            CartaoDeCredito = 1,
+            TransferenciaBancaria = 2,
+            BoletoBancario = 3
+        }
+
+        #region Pedido
 
         public int InserirPedido(PedidoModel pedido)
         {
@@ -54,7 +61,7 @@ namespace tcc_UI.Helpers
 
         public int InserirStatusPedido(StatusPedidoModel statusPedido)
         {
-            var metodo = "api/StatusPedido/";
+            var metodo = "api/StatusPedidos/";
             var objeto = ObjetoToJson(statusPedido);
             var retornoApi = ExecutarAPIPost(metodo, objeto);
 
@@ -76,6 +83,90 @@ namespace tcc_UI.Helpers
             return frete.IdFrete;
         }
 
+        #endregion
+
+        #region Cliente
+
+        public List<PedidoModel> ObterPedidosCliente(int idCliente)
+        {
+            var metodo = "api/pedidos/cliente/" + idCliente;
+            List<PedidoModel> pedidos = null;
+            List<PedidoModel> pedidosFinal = new List<PedidoModel>();
+            FreteModel frete = null;
+            EnderecoModel endereco = null;
+            List<StatusPedidoModel> statusPedido = null;
+            List<ProdutoModels> produtos = null;
+
+            var retornoApi = ExecutarApiGet(metodo);
+
+            if (retornoApi.Status == HttpStatusCode.OK)
+            {
+                pedidos = JsonConvert.DeserializeObject<List<PedidoModel>>(retornoApi.Objeto);
+
+                foreach (var pedido in pedidos)
+                {
+                    // Obter Frete
+                    metodo = "api/fretes/cliente/" + pedido.IdPedido;
+                    retornoApi = ExecutarApiGet(metodo);
+
+                    if (retornoApi.Status == HttpStatusCode.OK && retornoApi.Objeto != null)
+                    {
+                        frete = JsonConvert.DeserializeObject<FreteModel>(retornoApi.Objeto);
+                        pedido.Frete = frete;
+                    }
+
+                    // Obter Endereco
+                    metodo = "api/enderecos/" + pedido.IdEnderecoRef;
+                    retornoApi = ExecutarApiGet(metodo);
+
+                    if (retornoApi.Status == HttpStatusCode.OK && retornoApi.Objeto != null)
+                    {
+                        endereco = JsonConvert.DeserializeObject<EnderecoModel>(retornoApi.Objeto);
+                        pedido.Endereco = endereco;
+                    }
+
+                    // Obter StatusPedido
+                    metodo = "api/StatusPedido/Pedido/" + pedido.IdPedido;
+                    retornoApi = ExecutarApiGet(metodo);
+
+                    if (retornoApi.Status == HttpStatusCode.OK && retornoApi.Objeto != null)
+                    {
+                        statusPedido = JsonConvert.DeserializeObject<List<StatusPedidoModel>>(retornoApi.Objeto);
+                        pedido.StatusPedido = statusPedido;
+                    }
+
+                    // Obter Produtos
+                    metodo = "api/PedidoProdutos/Pedido/" + pedido.IdPedido;
+                    retornoApi = ExecutarApiGet(metodo);
+
+                    if (retornoApi.Status == HttpStatusCode.OK && retornoApi.Objeto != null)
+                    {
+                        produtos = JsonConvert.DeserializeObject<List<ProdutoModels>>(retornoApi.Objeto);
+                        pedido.Itens = produtos;
+                    }
+
+                    pedidosFinal.Add(pedido);
+                }
+            }
+
+            return pedidosFinal;
+        }
+
+        public ClienteModel ObterDadosCliente(int idCliente)
+        {
+            var metodo = "api/clientes/" + idCliente;
+            ClienteModel cliente = null;
+            var retornoApi = ExecutarApiGet(metodo);
+
+            if (retornoApi.Status == HttpStatusCode.OK)
+            {
+                cliente = JsonConvert.DeserializeObject<ClienteModel>(retornoApi.Objeto);
+                cliente.Enderecos = ObterEnderecosCliente(idCliente);
+            }
+
+            return cliente;
+        }
+
         public List<EnderecoModel> ObterEnderecosCliente(int idCliente)
         {
             var metodo = "api/enderecos/cliente/" + idCliente.ToString();
@@ -87,6 +178,10 @@ namespace tcc_UI.Helpers
 
             return enderecos;
         }
+
+        #endregion
+
+        #region Fornecedor
 
         public List<ProdutoModels> ObterProdutos()
         {
