@@ -47,10 +47,10 @@ namespace tcc_criar_db
                     var endereco1 = new Endereco
                     {
                         Cliente = cliente,
-                        Rua = "Marechal Deodoro",
+                        Rua = "Av Marechal Gonzaga",
                         Numero = 94,
                         Bairro = "Centro",
-                        Cep = "09175-320",
+                        Cep = "09630-320",
                         Cidade = "São Caetano do Sul",
                         Estado = "SP",
                         Pais = "Brasil",

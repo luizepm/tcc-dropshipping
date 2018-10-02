@@ -8,6 +8,11 @@
     Meus Pedidos
 </div>
 
+@if (Model.Pedidos.Count == 0)
+{
+    <p>Nenhum pedido realizado.</p>
+}
+
 @{
     var login = (tcc_UI.Models.LoginModels)Session["Login"];
     foreach (var pedido in Model.Pedidos)
